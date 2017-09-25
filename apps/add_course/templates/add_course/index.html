@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>boot camp course</title>
+</head>
+<body>
+  <h2>Add a new course</h2>
+  {%if messages%}
+    {% for message in messages %}
+      <li>{{message}}</li>
+    {% endfor %}
+  {% endif %}
+  <form action="/add" method="post">
+    {% csrf_token %}
+    Name: <input type="text" name="name"><br>
+    Description: <input type="text" name="description"><br>
+    <input type="submit" value="Add">
+  </form>
+
+  <h2>Course</h2>
+  <table border="1">
+    <tr>
+      <th>Course Name</th>
+      <th>Description</th>
+      <th>Date Added</th>
+      <th>Actions</th>
+    </tr>
+    {% if courses %}
+      {% for course in courses %}
+        <tr>
+          <td>{{course.name}}</td>
+          <td>{{course.description}}</td>
+          <td>{{course.created_at}}</td>
+          <td><a href="/remove/{{course.id}}">remove</a></td>
+        </tr>
+      {%endfor%}
+    {%endif%}
+
+
+  </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
